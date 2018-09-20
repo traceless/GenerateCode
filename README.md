@@ -5,7 +5,7 @@ it used to produce 7 bit string, can be produced by quantity, not duplicated, ca
 1、'cipher' you need to save, 'start' it need increase last sum value if you want to produced code in next time;
 ``` 
 const generateCode = require('generateCode');
-const cipher = generateCode.noRepeatStr(); //example: DJosIOVYlEmahcr6Mf4dSCBqzNX1bPwteyGL
+const cipher = generateCode.noRepeatStr(36); //example: DJosIOVYlEmahcr6Mf4dSCBqzNX1bPwteyGL
 const start = 123; 
 const sum = 200;
 const codeArray = generateCode.generate(cipher, start, sum);
