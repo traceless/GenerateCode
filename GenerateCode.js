@@ -8,12 +8,12 @@ function GenerateCode() {
  * 生产一个不重复的36位数
  */
 GenerateCode.prototype.noRepeatStr = function (num) {
-    var source = 'ZXCVBNMASDFGHJKLQWERTYUIOP0123456789zxcvbnmasdfghjklqwertyuiop';
-    var length = source.length;
+    let source = 'ZXCVBNMASDFGHJKLQWERTYUIOP0123456789zxcvbnmasdfghjklqwertyuiop';
+    let length = source.length;
     source = source.split('');
-    var str = '';
-    for (var i = 0; i < num; i++) {
-        var index = Math.random() * length | 0;
+    let str = '';
+    for (let i = 0; i < num; i++) {
+        const index = Math.random() * length | 0;
         str += source[index];
         source.splice(index, 1);
         length--;
@@ -26,8 +26,8 @@ GenerateCode.prototype.noRepeatStr = function (num) {
  *  进制转换，num源数据，M表示num的进制，n表示目标进制 ，例如decimal('zjf', 36, 10) 比zjf 36进制转换成10进制
  */
 function decimal(num, m, n) {
-    var s = num + '';
-    var result = parseInt(s, m).toString(n);
+    const s = num + '';
+    const result = parseInt(s, m).toString(n);
     return result;
 }
 
@@ -35,11 +35,11 @@ function decimal(num, m, n) {
  * 给一个numstr字符串7位
  */
 GenerateCode.prototype.validate = function (numstr, cipher) {
-    var vs = numstr.substring(numstr.length - 1, numstr.length);
+    const vs = numstr.substring(numstr.length - 1, numstr.length);
     numstr = numstr.substring(0, numstr.length - 1);
-    var str = transform(numstr, cipher, this.source);
-    var num = parseInt(decimal(str, cipher.length, 10)); //根据cipher长度定义进制，范围2-36
-    var v = num % cipher.length; //求余数
+    const str = transform(numstr, cipher, this.source);
+    const num = parseInt(decimal(str, cipher.length, 10)); //根据cipher长度定义进制，范围2-36
+    const v = num % cipher.length; //求余数
     return cipher.charAt(v) == vs;
 };
 
@@ -49,11 +49,11 @@ GenerateCode.prototype.validate = function (numstr, cipher) {
 function transform(numstr, source, cipher) {
     cipher = cipher + '';//强制转换字符串
     source = source + '';
-    var array = numstr.split('');
-    var length = array.length;
-    var res = '';
-    for (var i = 0; i < length; i++) {
-        var index = source.indexOf(array[i]);
+    const array = numstr.split('');
+    const length = array.length;
+    let res = '';
+    for (let i = 0; i < length; i++) {
+        const index = source.indexOf(array[i]);
         res += cipher.charAt(index);
     }
     return res;
@@ -88,6 +88,6 @@ GenerateCode.prototype.generate = function (cipher, start, number) {
 };
 
 module.exports = new GenerateCode();
-// var test = new GenerateCode();
-// console.info(test.noRepeatStr(36));
-// test.generate('DJosIOVYlEmahcr6Mf4dSCBqzNX1bPwteyGL', 123);
+var test = new GenerateCode();
+console.info(test.noRepeatStr(36));
+test.generate('DJosIOVYlEmahcr6Mf4dSCBqzNX1bPwteyGL', 123);
